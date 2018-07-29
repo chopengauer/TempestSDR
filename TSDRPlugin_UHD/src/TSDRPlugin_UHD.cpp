@@ -14,7 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <uhd/utils/thread_priority.hpp>
+//#include <uhd/utils/thread_priority.hpp>
+#include <uhd/utils/thread.hpp>
 #include <uhd/utils/safe_main.hpp>
 #include <uhd/usrp/multi_usrp.hpp>
 #include <uhd/transport/udp_simple.hpp>
@@ -45,6 +46,8 @@ uint32_t req_freq = 105e6;
 float req_gain = 1;
 double req_rate = 25e6;
 volatile int is_running = 0;
+
+double timeout = 0.1;
 
 EXTERNC TSDRPLUGIN_API void __stdcall tsdrplugin_getName(char * name) {
 	strcpy(name, "TSDR UHD USRP Compatible Plugin");
@@ -332,7 +335,8 @@ EXTERNC TSDRPLUGIN_API int __stdcall tsdrplugin_readasync(tsdrplugin_readasync_f
 		// flush usrpbuffer
 	    while(rx_stream->recv(
 	        buff, samples_per_api_read, md,
-	        uhd::device::RECV_MODE_ONE_PACKET
+	        timeout
+	        //uhd::device::RECV_MODE_ONE_PACKET
 	    )){
 	        /* NOP */
 	    };
