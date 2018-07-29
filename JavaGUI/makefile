@@ -90,7 +90,7 @@ PLUGINS += TSDRPlugin_Mirics TSDRPlugin_ExtIO
 else ifeq ($(OSNAME), LINUX)
 PLUGINS += TSDRPlugin_librtlsdr
 PLUGINS += TSDRPlugin_HackRF
-#PLUGINS += TSDRPlugin_UHD
+PLUGINS += TSDRPlugin_UHD
 else ifeq ($(OSNAME), MAC)
 PLUGINS += TSDRPlugin_UHD
 endif
